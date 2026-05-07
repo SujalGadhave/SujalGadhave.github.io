@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --background: #070b16;
+  --foreground: #e5ecff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  border-color: rgb(148 163 184 / 0.08);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.section-anchor {
+  scroll-margin-top: 120px;
+}
+
+.page-gradient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -30;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.18), transparent 35%),
+    radial-gradient(circle at 85% 25%, rgba(14, 165, 233, 0.15), transparent 30%),
+    radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.1), transparent 30%),
+    linear-gradient(150deg, #05070f 0%, #070b16 45%, #060912 100%);
+}
+
+.hero-spotlight {
+  background:
+    radial-gradient(circle at 35% 25%, rgba(56, 189, 248, 0.2), transparent 45%),
+    radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.1), transparent 50%);
+}
+
+a,
+button,
+input,
+textarea {
+  transition: all 180ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
