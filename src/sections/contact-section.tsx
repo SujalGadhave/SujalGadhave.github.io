@@ -1,14 +1,35 @@
+"use client";
+
+import type { FormEvent } from "react";
 import { Send } from "lucide-react";
 
 import { SectionShell } from "@/components/section-shell";
 import { Button } from "@/components/ui/button";
 
 export function ContactSection() {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name || "a recruiter"}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+    );
+
+    window.location.href = `mailto:sujalgadhave009@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <SectionShell
       id="contact"
       title="Contact"
-      subtitle="Let’s connect for internships, junior engineering roles, or backend-focused collaborations."
+      subtitle="Let's connect for internships, junior engineering roles, or backend-focused collaborations."
     >
       <div className="grid gap-5 lg:grid-cols-2">
         <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
@@ -46,9 +67,7 @@ export function ContactSection() {
 
         <form
           className="rounded-3xl border border-white/10 bg-white/[0.03] p-6"
-          action="mailto:sujalgadhave009@gmail.com"
-          method="post"
-          encType="text/plain"
+          onSubmit={handleSubmit}
         >
           <h3 className="text-xl font-semibold text-white">Quick Message</h3>
 
@@ -71,7 +90,7 @@ export function ContactSection() {
               name="message"
               required
               rows={4}
-              placeholder="Let’s talk about opportunities or collaboration."
+              placeholder="Let's talk about opportunities or collaboration."
               className="w-full resize-none rounded-xl border border-white/10 bg-slate-950/70 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-sky-300/60 focus:outline-none"
             />
           </div>
@@ -85,4 +104,3 @@ export function ContactSection() {
     </SectionShell>
   );
 }
-
