@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 
 export function ParticleField() {
-  const particles = Array.from({ length: 16 }, (_, index) => ({
+  const particles = Array.from({ length: 18 }, (_, index) => ({
     id: index,
-    left: `${(index * 7 + 11) % 100}%`,
-    duration: 8 + (index % 6),
-    delay: index * 0.3,
-    scale: 0.6 + (index % 4) * 0.2,
+    left: `${(index * 13 + 7) % 100}%`,
+    duration: 12 + (index % 6),
+    delay: index * 0.45,
+    size: index % 3 === 0 ? "h-2 w-2" : "h-1.5 w-1.5",
   }));
 
   return (
@@ -16,18 +16,21 @@ export function ParticleField() {
       {particles.map((particle) => (
         <motion.span
           key={particle.id}
-          className="absolute top-[110%] block h-1.5 w-1.5 rounded-full bg-sky-200/35"
+          className={`absolute top-[108%] block rounded-full bg-[var(--accent-soft)] ${particle.size}`}
           style={{ left: particle.left }}
-          animate={{ y: [-10, -920], opacity: [0, 1, 0], scale: [0.5, particle.scale, 0.4] }}
+          animate={{
+            y: [0, -980],
+            opacity: [0, 0.9, 0],
+            scale: [0.7, 1.2, 0.55],
+          }}
           transition={{
-            repeat: Number.POSITIVE_INFINITY,
             duration: particle.duration,
-            delay: particle.delay,
             ease: "linear",
+            repeat: Number.POSITIVE_INFINITY,
+            delay: particle.delay,
           }}
         />
       ))}
     </div>
   );
 }
-

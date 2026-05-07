@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { Calendar, GitBranch, Star } from "lucide-react";
+import { Calendar, GitCommitHorizontal, GitFork, Star } from "lucide-react";
 
-import { SectionShell } from "@/components/section-shell";
 import { Badge } from "@/components/ui/badge";
+import { SectionShell } from "@/components/section-shell";
 import { formatDate } from "@/lib/utils";
 import type { GitHubSnapshot } from "@/types/portfolio";
 
@@ -14,60 +14,60 @@ export function GitHubSection({ github }: GitHubSectionProps) {
   return (
     <SectionShell
       id="github"
-      title="GitHub"
-      subtitle="Live profile intelligence plus repository activity and language footprint."
+      title="GitHub Activity"
+      subtitle="Repository pulse, contribution consistency, and language distribution aligned with a backend-first profile."
     >
-      <div className="grid gap-5 xl:grid-cols-[1.1fr_1fr]">
+      <div className="grid gap-5 xl:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-4">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
+          <div className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-4">
             <Image
-              src={`https://ghchart.rshah.org/38bdf8/${github.profile.login}`}
-              alt={`${github.profile.login} contribution chart`}
+              src={`https://ghchart.rshah.org/8df4ff/${github.profile.login}`}
+              alt={`${github.profile.login} contribution graph`}
               width={1200}
               height={180}
               unoptimized
-              className="h-auto w-full rounded-xl"
+              className="h-auto w-full rounded-[var(--radius-lg)]"
             />
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
+            <div className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-4">
               <Image
-                src={`https://github-readme-stats.vercel.app/api?username=${github.profile.login}&show_icons=true&theme=transparent&hide_border=true&title_color=ffffff&text_color=cbd5e1&icon_color=7dd3fc`}
-                alt="GitHub stats"
-                width={640}
+                src={`https://github-readme-stats.vercel.app/api?username=${github.profile.login}&show_icons=true&theme=transparent&hide_border=true&title_color=e2eeff&text_color=9fb0ce&icon_color=8df4ff`}
+                alt="GitHub overview stats"
+                width={680}
                 height={320}
                 unoptimized
-                className="h-auto w-full rounded-xl"
+                className="h-auto w-full rounded-[var(--radius-md)]"
               />
             </div>
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-4">
+            <div className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-4">
               <Image
-                src={`https://streak-stats.demolab.com?user=${github.profile.login}&theme=transparent&hide_border=true&ring=38bdf8&fire=38bdf8&currStreakLabel=ffffff`}
-                alt="GitHub streak"
-                width={640}
+                src={`https://streak-stats.demolab.com?user=${github.profile.login}&theme=transparent&hide_border=true&ring=8df4ff&fire=8df4ff&currStreakLabel=e2eeff`}
+                alt="GitHub contribution streak"
+                width={680}
                 height={320}
                 unoptimized
-                className="h-auto w-full rounded-xl"
+                className="h-auto w-full rounded-[var(--radius-md)]"
               />
             </div>
           </div>
         </div>
 
         <aside className="space-y-4">
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-lg font-semibold text-white">Most Used Languages</h3>
+          <div className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5">
+            <h3 className="text-lg font-semibold text-[var(--text-primary)]">Language Distribution</h3>
             <div className="mt-4 space-y-3">
               {github.languageShare.map((language) => (
                 <div key={language.name}>
-                  <div className="mb-1 flex items-center justify-between text-sm text-slate-300">
+                  <div className="mb-1 flex items-center justify-between text-sm text-[var(--text-secondary)]">
                     <span>{language.name}</span>
                     <span>{language.value}</span>
                   </div>
-                  <div className="h-2 overflow-hidden rounded-full bg-white/10">
+                  <div className="h-2 overflow-hidden rounded-full bg-[var(--surface-soft)]">
                     <div
-                      className="h-full rounded-full bg-gradient-to-r from-sky-300 to-cyan-400"
-                      style={{ width: `${Math.max(14, language.value * 10)}%` }}
+                      className="h-full rounded-full bg-gradient-to-r from-[var(--accent-primary)] to-[var(--accent-secondary)]"
+                      style={{ width: `${Math.max(16, language.value * 7)}%` }}
                     />
                   </div>
                 </div>
@@ -75,8 +75,8 @@ export function GitHubSection({ github }: GitHubSectionProps) {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-5">
-            <h3 className="text-lg font-semibold text-white">Highlighted Repositories</h3>
+          <div className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-5">
+            <h3 className="text-lg font-semibold text-[var(--text-primary)]">Highlighted Repositories</h3>
             <div className="mt-4 space-y-3">
               {github.topRepos.map((repo) => (
                 <a
@@ -84,21 +84,28 @@ export function GitHubSection({ github }: GitHubSectionProps) {
                   href={repo.htmlUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="block rounded-2xl border border-white/10 bg-slate-900/60 p-3 transition hover:border-sky-300/40"
+                  className="block rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--surface-soft)] p-3 transition-colors hover:border-[var(--border-strong)]"
+                  data-cursor="interactive"
                 >
-                  <div className="mb-2 flex items-center justify-between">
-                    <p className="font-medium text-white">{repo.name}</p>
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <p className="text-sm font-semibold text-[var(--text-primary)]">{repo.name}</p>
                     <Badge>{repo.language}</Badge>
                   </div>
-                  <p className="text-xs leading-relaxed text-slate-300">{repo.description}</p>
-                  <div className="mt-3 flex flex-wrap gap-3 text-xs text-slate-400">
+                  <p className="max-h-14 overflow-hidden text-xs leading-relaxed text-[var(--text-secondary)]">
+                    {repo.description}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3 text-xs text-[var(--text-dim)]">
                     <span className="inline-flex items-center gap-1">
                       <Star className="h-3.5 w-3.5" />
                       {repo.stars}
                     </span>
                     <span className="inline-flex items-center gap-1">
-                      <GitBranch className="h-3.5 w-3.5" />
+                      <GitFork className="h-3.5 w-3.5" />
                       {repo.forks}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <GitCommitHorizontal className="h-3.5 w-3.5" />
+                      Updated
                     </span>
                     <span className="inline-flex items-center gap-1">
                       <Calendar className="h-3.5 w-3.5" />
@@ -114,4 +121,3 @@ export function GitHubSection({ github }: GitHubSectionProps) {
     </SectionShell>
   );
 }
-

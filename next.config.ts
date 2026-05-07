@@ -6,7 +6,6 @@ const isUserOrOrgPagesRepo =
   Boolean(owner) &&
   Boolean(repositoryName) &&
   repositoryName.toLowerCase() === `${owner.toLowerCase()}.github.io`;
-
 const basePath =
   isGitHubPages && repositoryName && !isUserOrOrgPagesRepo ? `/${repositoryName}` : "";
 
@@ -21,3 +20,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

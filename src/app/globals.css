@@ -1,19 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --background: #070b16;
-  --foreground: #e5ecff;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+  --space-128: 128px;
+
+  --surface-base: #060914;
+  --surface-card: rgba(14, 20, 36, 0.82);
+  --surface-soft: rgba(19, 28, 48, 0.8);
+  --surface-strong: rgba(33, 46, 77, 0.88);
+  --surface-glass: rgba(10, 15, 28, 0.68);
+
+  --text-primary: #e6eeff;
+  --text-secondary: #adbcd8;
+  --text-muted: #96a5c3;
+  --text-dim: #71829f;
+
+  --accent-primary: #8df4ff;
+  --accent-secondary: #91a4ff;
+  --accent-soft: rgba(141, 244, 255, 0.16);
+
+  --border-subtle: rgba(130, 153, 195, 0.18);
+  --border-strong: rgba(141, 244, 255, 0.45);
+
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+
+  --shadow-elevated: 0 22px 70px rgba(3, 8, 20, 0.58);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--surface-base);
+  --color-foreground: var(--text-primary);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
 }
 
 * {
-  border-color: rgb(148 163 184 / 0.08);
+  border-color: var(--border-subtle);
 }
 
 html,
@@ -21,39 +56,67 @@ body {
   min-height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
+  background: var(--surface-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans), sans-serif;
   text-rendering: optimizeLegibility;
 }
 
 .section-anchor {
-  scroll-margin-top: 120px;
+  scroll-margin-top: 112px;
 }
 
 .page-gradient-bg {
   position: fixed;
   inset: 0;
-  z-index: -30;
+  z-index: -40;
   background:
-    radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.18), transparent 35%),
-    radial-gradient(circle at 85% 25%, rgba(14, 165, 233, 0.15), transparent 30%),
-    radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.1), transparent 30%),
-    linear-gradient(150deg, #05070f 0%, #070b16 45%, #060912 100%);
+    radial-gradient(circle at 15% 10%, rgba(95, 220, 255, 0.16), transparent 40%),
+    radial-gradient(circle at 88% 25%, rgba(127, 139, 252, 0.18), transparent 40%),
+    radial-gradient(circle at 56% 82%, rgba(73, 121, 255, 0.1), transparent 38%),
+    linear-gradient(152deg, #050812 0%, #070d1b 50%, #050916 100%);
 }
 
-.hero-spotlight {
-  background:
-    radial-gradient(circle at 35% 25%, rgba(56, 189, 248, 0.2), transparent 45%),
-    radial-gradient(circle at 70% 50%, rgba(6, 182, 212, 0.1), transparent 50%);
+.project-card {
+  will-change: transform;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.project-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-elevated);
+}
+
+.stack-wall-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+
+@media (min-width: 640px) {
+  .stack-wall-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-16);
+  }
+}
+
+@media (min-width: 1024px) {
+  .stack-wall-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 a,
 button,
 input,
 textarea {
-  transition: all 180ms ease;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform
+    180ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -66,4 +129,3 @@ textarea {
     scroll-behavior: auto !important;
   }
 }
-

@@ -17,18 +17,34 @@ export interface SkillCategory {
 export interface ProjectItem {
   name: string;
   repo: string;
-  summary: string;
-  stack: string[];
-  architecture: string[];
-  features: string[];
   liveUrl?: string;
-  category: "backend" | "fullstack" | "frontend" | "ai";
+  status: "live" | "private-demo" | "in-progress";
+  summary: string;
+  problem: string;
+  architectureSummary: string;
+  complexity: string;
+  backendStrength: string;
+  securityHighlights: string[];
+  keyFeatures: string[];
+  stack: string[];
+  category: "backend" | "fullstack" | "ai";
+  gradient: string;
 }
 
 export interface JourneyMilestone {
   title: string;
   time: string;
   details: string;
+}
+
+export interface PhilosophyPoint {
+  title: string;
+  description: string;
+}
+
+export interface HeroStat {
+  label: string;
+  value: string;
 }
 
 export interface GitHubProfile {

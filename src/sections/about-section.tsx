@@ -1,23 +1,23 @@
-import { BrainCircuit, Gamepad2, ShieldCheck } from "lucide-react";
+import { ShieldCheck, Workflow, Wrench } from "lucide-react";
 
 import { aboutPoints } from "@/data/portfolio";
 import { SectionShell } from "@/components/section-shell";
 
-const cards = [
+const emphasisCards = [
   {
     icon: ShieldCheck,
-    title: "Security-Oriented",
-    text: "Authentication, authorization, and backend reliability are core priorities in real project work.",
+    title: "Security & Auth Depth",
+    text: "Strong attention on JWT flow design, role-based authorization, and encryption-aware backend implementation.",
   },
   {
-    icon: BrainCircuit,
-    title: "Engineering Mindset",
-    text: "Focus on maintainability, architecture clarity, and practical tradeoffs over flashy-but-fragile code.",
+    icon: Workflow,
+    title: "Architecture Discipline",
+    text: "Service-layer clarity, clean controller boundaries, and practical modularization across backend-heavy projects.",
   },
   {
-    icon: Gamepad2,
-    title: "Curiosity Driven",
-    text: "Gaming and problem-solving habits fuel systems thinking, performance awareness, and iterative improvement.",
+    icon: Wrench,
+    title: "Execution Mindset",
+    text: "Focused on building complete systems that work in local environments, with clear setup and deployment intent.",
   },
 ];
 
@@ -25,27 +25,29 @@ export function AboutSection() {
   return (
     <SectionShell
       id="about"
-      title="About"
-      subtitle="An engineer focused on secure backend systems and full-stack execution."
+      title="Backend-Driven Engineering Identity"
+      subtitle="A developer profile centered on production-ready backend systems with full-stack execution capability."
     >
-      <div className="grid gap-6 lg:grid-cols-2">
-        <div className="space-y-4 text-slate-300">
-          {aboutPoints.map((point) => (
-            <p key={point} className="leading-relaxed">
-              {point}
-            </p>
-          ))}
+      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="rounded-[var(--radius-xl)] border border-[var(--border-subtle)] bg-[var(--surface-card)] p-6 sm:p-8">
+          <div className="space-y-4 text-[var(--text-secondary)]">
+            {aboutPoints.map((point) => (
+              <p key={point} className="leading-relaxed">
+                {point}
+              </p>
+            ))}
+          </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-          {cards.map(({ icon: Icon, title, text }) => (
+        <div className="grid gap-4">
+          {emphasisCards.map(({ icon: Icon, title, text }) => (
             <article
               key={title}
-              className="rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-sky-300/40 hover:bg-white/[0.05]"
+              className="rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--surface-soft)] p-5 transition-colors hover:border-[var(--border-strong)]"
             >
-              <Icon className="h-5 w-5 text-sky-300" />
-              <h3 className="mt-3 text-lg font-semibold text-white">{title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-slate-300">{text}</p>
+              <Icon className="h-5 w-5 text-[var(--accent-primary)]" />
+              <h3 className="mt-3 text-lg font-semibold text-[var(--text-primary)]">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{text}</p>
             </article>
           ))}
         </div>
@@ -53,4 +55,3 @@ export function AboutSection() {
     </SectionShell>
   );
 }
-

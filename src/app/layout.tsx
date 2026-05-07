@@ -11,21 +11,22 @@ const siteUrl = resolveSiteUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Sujal Gadhave | Full-Stack Java Developer",
+  title: "Sujal Gadhave | Backend-Focused Full-Stack Engineer",
   description:
-    "Portfolio of Sujal Gadhave - Java, Spring Boot, React, and security-first full-stack engineering.",
+    "Portfolio of Sujal Gadhave - Java, Spring Boot, secure backend systems, and full-stack engineering execution.",
   keywords: [
     "Sujal Gadhave",
-    "Spring Boot Developer",
+    "Java Backend Developer",
     "Java Developer",
-    "Full Stack Developer",
-    "React Developer",
-    "Backend Engineer",
+    "Spring Boot Developer",
+    "Secure API Engineer",
+    "Full Stack Engineer",
+    "Authentication Systems",
   ],
   openGraph: {
-    title: "Sujal Gadhave | Full-Stack Java Developer",
+    title: "Sujal Gadhave | Backend-Focused Full-Stack Engineer",
     description:
-      "Building production-grade backend and full-stack systems with Java, Spring Boot, React, and strong engineering discipline.",
+      "Building production-grade backend and full-stack systems with Java, Spring Boot, React, and architecture-first engineering discipline.",
     type: "website",
     url: siteUrl,
     images: [
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sujal Gadhave | Full-Stack Java Developer",
+    title: "Sujal Gadhave | Backend-Focused Full-Stack Engineer",
     description:
-      "Premium developer portfolio focused on backend architecture and full-stack execution.",
+      "Premium developer portfolio focused on backend architecture, secure APIs, and full-stack execution.",
     images: ["https://opengraph.githubassets.com/1/SujalGadhave/SujalGadhave"],
   },
 };
@@ -54,6 +55,31 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Sujal Gadhave",
+              url: "https://sujalgadhave.github.io",
+              sameAs: [
+                "https://github.com/SujalGadhave",
+                "https://www.linkedin.com/in/sujalgadhave",
+              ],
+              jobTitle: "Backend-Focused Full-Stack Engineer",
+              knowsAbout: [
+                "Java",
+                "Spring Boot",
+                "Spring Security",
+                "REST API Architecture",
+                "Authentication Systems",
+                "React",
+                "TypeScript",
+              ],
+            }),
+          }}
+        />
         <LenisProvider>{children}</LenisProvider>
       </body>
     </html>

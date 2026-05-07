@@ -7,9 +7,10 @@ export function useLenis() {
   useEffect(() => {
     const lenis = new Lenis({
       autoRaf: true,
-      duration: 1,
+      duration: 0.95,
       smoothWheel: true,
-      touchMultiplier: 1.2,
+      touchMultiplier: 1.1,
+      lerp: 0.1,
     });
 
     return () => {

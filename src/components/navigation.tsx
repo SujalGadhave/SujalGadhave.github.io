@@ -1,11 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useMemo, useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { NavItem } from "@/types/portfolio";
 
@@ -21,14 +20,15 @@ export function Navigation({ activeSection, items }: NavigationProps) {
     () =>
       items.map((item) => {
         const isActive = activeSection === item.id;
-
         return (
           <a
             key={item.id}
             href={`#${item.id}`}
             className={cn(
-              "rounded-full px-3 py-1.5 text-sm transition-colors",
-              isActive ? "bg-white/15 text-white" : "text-slate-300 hover:text-white"
+              "rounded-full px-3 py-2 text-sm transition-all",
+              isActive
+                ? "bg-[var(--surface-strong)] text-[var(--text-primary)] shadow-[0_8px_30px_rgba(8,15,34,0.45)]"
+                : "text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
             )}
           >
             {item.label}
@@ -39,50 +39,59 @@ export function Navigation({ activeSection, items }: NavigationProps) {
   );
 
   return (
-    <header className="fixed inset-x-0 top-0 z-40 px-4 pt-4 sm:px-8">
-      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between rounded-full border border-white/10 bg-slate-950/80 px-4 py-2 backdrop-blur-xl">
-        <Link href="#home" className="text-sm font-semibold tracking-wide text-white">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+      <nav className="mx-auto flex w-full max-w-[1120px] items-center justify-between rounded-full border border-[var(--border-subtle)] bg-[color:var(--surface-glass)] px-4 py-2 backdrop-blur-xl">
+        <Link
+          href="#home"
+          className="text-base font-semibold tracking-wide text-[var(--text-primary)]"
+          data-cursor="interactive"
+        >
           SG
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">{desktopItems}</div>
+        <div className="hidden items-center gap-1 lg:flex">{desktopItems}</div>
 
-        <Button
-          variant="outline"
-          size="icon"
-          className="md:hidden"
-          onClick={() => setOpen((prev) => !prev)}
+        <button
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-strong)] text-[var(--text-primary)] lg:hidden"
           aria-label="Toggle menu"
+          onClick={() => setOpen((prev) => !prev)}
+          data-cursor="interactive"
         >
           {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-        </Button>
+        </button>
       </nav>
 
       <AnimatePresence>
         {open ? (
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="mx-auto mt-3 max-w-6xl rounded-3xl border border-white/10 bg-slate-950/95 p-4 backdrop-blur-xl md:hidden"
+            className="mx-auto mt-3 max-w-[1120px] rounded-2xl border border-[var(--border-subtle)] bg-[color:var(--surface-glass)] p-3 backdrop-blur-xl lg:hidden"
           >
-            <div className="grid gap-2">
-              {items.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={cn(
-                    "rounded-xl px-4 py-2 text-sm",
-                    activeSection === item.id
-                      ? "bg-white/15 text-white"
-                      : "text-slate-300 hover:bg-white/10"
-                  )}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+            <div className="grid gap-1">
+              {items.map((item) => {
+                const isActive = activeSection === item.id;
+
+                return (
+                  <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "rounded-xl px-4 py-2 text-sm",
+                      isActive
+                        ? "bg-[var(--surface-strong)] text-[var(--text-primary)]"
+                        : "text-[var(--text-secondary)] hover:bg-[var(--surface-soft)] hover:text-[var(--text-primary)]"
+                    )}
+                    data-cursor="interactive"
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </div>
           </motion.div>
         ) : null}
@@ -90,4 +99,3 @@ export function Navigation({ activeSection, items }: NavigationProps) {
     </header>
   );
 }
-

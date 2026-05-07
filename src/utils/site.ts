@@ -2,8 +2,7 @@ export function resolveSiteUrl() {
   const [owner, repository] = (process.env.GITHUB_REPOSITORY ?? "/").split("/");
 
   if (process.env.GITHUB_PAGES === "true" && owner && repository) {
-    const isUserOrOrgPagesRepo =
-      repository.toLowerCase() === `${owner.toLowerCase()}.github.io`;
+    const isUserOrOrgPagesRepo = repository.toLowerCase() === `${owner.toLowerCase()}.github.io`;
 
     if (isUserOrOrgPagesRepo) {
       return `https://${repository}`;
@@ -14,3 +13,4 @@ export function resolveSiteUrl() {
 
   return "https://sujalgadhave.github.io";
 }
+

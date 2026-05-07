@@ -1,15 +1,14 @@
 "use client";
 
-import type { ReactNode, RefObject } from "react";
+import type { AnchorHTMLAttributes, ReactNode, RefObject } from "react";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
-interface MagneticLinkProps {
+interface MagneticLinkProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
   href: string;
   children: ReactNode;
-  className?: string;
 }
 
-export function MagneticLink({ href, children, className }: MagneticLinkProps) {
+export function MagneticLink({ href, children, className, ...rest }: MagneticLinkProps) {
   const ref = useMagnetic(0.15);
 
   return (
@@ -19,6 +18,7 @@ export function MagneticLink({ href, children, className }: MagneticLinkProps) {
       className={className}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noreferrer" : undefined}
+      {...rest}
     >
       {children}
     </a>

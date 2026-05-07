@@ -44,6 +44,8 @@ const fallback: GitHubSnapshot = {
   ],
 };
 
+const EXCLUDED_REPOSITORIES = new Set(["stats-fm-clone"]);
+
 async function fetchJson<T>(url: string): Promise<T> {
   const token = process.env.GITHUB_TOKEN;
 
@@ -71,7 +73,9 @@ export async function getGitHubSnapshot(username: string): Promise<GitHubSnapsho
       ),
     ]);
 
-    const filteredRepos = repos.filter((repo) => !repo.fork);
+    const filteredRepos = repos.filter(
+      (repo) => !repo.fork && !EXCLUDED_REPOSITORIES.has(repo.name.toLowerCase())
+    );
 
     const topRepos: GitHubRepoSummary[] = [...filteredRepos]
       .sort((a, b) => {

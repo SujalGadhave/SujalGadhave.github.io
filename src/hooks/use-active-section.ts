@@ -25,8 +25,8 @@ export function useActiveSection(sectionIds: string[]) {
         }
       },
       {
-        rootMargin: "-45% 0px -45% 0px",
-        threshold: [0.2, 0.5, 0.75],
+        rootMargin: "-35% 0px -55% 0px",
+        threshold: [0.15, 0.35, 0.6],
       }
     );
 
